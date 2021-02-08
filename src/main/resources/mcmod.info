@@ -1,0 +1,15 @@
+[
+{
+  "modid": "sprintpls",
+  "name": "SprintPls",
+  "description": "An actually functional ToggleSprint",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["bluelhf"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
