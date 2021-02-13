@@ -16,7 +16,6 @@ if "%DIRNAME%" == "" set DIRNAME=.
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%
 
-SET JAVA_HOME=C:\Program Files\AdoptOpenJDK\jdk-8.0.282.8-hotspot
 @rem Find java.exe
 if defined JAVA_HOME goto findJavaFromJavaHome
 
@@ -34,6 +33,10 @@ goto fail
 
 :findJavaFromJavaHome
 set JAVA_HOME=%JAVA_HOME:"=%
+for %%I in ("%JAVA_HOME%\..") do set "JAVA_PARENT=%%~fI"
+for /f "usebackq delims=|" %%i in (`dir /b "%JAVA_PARENT%\jdk-8*"`) do @(set "JAVA_HOME=%JAVA_PARENT%\%%i")
+echo Got JDK8 JAVA_HOME as %JAVA_HOME%
+
 set JAVA_EXE=%JAVA_HOME%/bin/java.exe
 
 if exist "%JAVA_EXE%" goto init
