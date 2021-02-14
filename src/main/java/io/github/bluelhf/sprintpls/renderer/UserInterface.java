@@ -1,18 +1,15 @@
 package io.github.bluelhf.sprintpls.renderer;
 
+import io.github.bluelhf.sprintpls.SprintPls;
+import io.github.bluelhf.sprintpls.util.Aligns;
+import io.github.bluelhf.sprintpls.util.Area;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.client.renderer.vertex.VertexFormat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.io.IOException;
@@ -23,8 +20,10 @@ public class UserInterface {
     private final Model model;
     private final View view;
     private final Controller controller;
+    private final SprintPls registrar;
 
-    public UserInterface() {
+    public UserInterface(SprintPls registrar) {
+        this.registrar = registrar;
         model = new Model();
         view = new View();
         controller = new Controller();
@@ -43,58 +42,54 @@ public class UserInterface {
     }
 
 
-
-
-
     public class Model {
         public float chromaSpeed = 50;
         public boolean chroma = true, dropShadow = true;
         public float hue = 1, saturation = 1, brightness = 1;
 
+        // These are part of Model instead of View because they be stored in the configuration.
+        public int viewX = 10, viewY = 10;
+        public final HashMap<SprintState, String> stateTextMap = new HashMap<>();
     }
 
     public class View {
 
         public final RainbowFontRenderer renderer;
-        private final HashMap<SprintState, String> stateTextMap = new HashMap<>();
-        public int x = 10, y = 10;
+
         public boolean highlight = false;
 
         public View() {
             Minecraft minecraft = Minecraft.getMinecraft();
-            if (minecraft == null) throw new IllegalStateException("Cannot instantiate View without renderer when Minecraft is not running.");
+            if (minecraft == null)
+                throw new IllegalStateException("Cannot instantiate View without renderer when Minecraft is not running.");
             this.renderer = new RainbowFontRenderer(minecraft.gameSettings, new ResourceLocation("textures/font/ascii.png"), minecraft.renderEngine, false);
             this.renderer.onResourceManagerReload(null);
             MinecraftForge.EVENT_BUS.register(this);
         }
 
         public void setText(SprintState sprintState, String text) {
-            stateTextMap.put(sprintState, text);
+            model.stateTextMap.put(sprintState, text);
         }
+
 
         @SubscribeEvent
         public void render(RenderGameOverlayEvent.Post event) {
             if (renderer == null) return;
+            if (event.type != RenderGameOverlayEvent.ElementType.EXPERIENCE) return;
             SprintState s = SprintState.getClientState();
-            int d = controller.width / 3;
-            int align = 0;
-            if (y < 660 || x < 500 || x > 780) {
-                if (x < 1.45 * d) {
-                    align = 0;
-                } else if (x < 1.55 * d) {
-                    align = 1;
-                } else if (x < 3 * d) {
-                    align = 2;
-                }
-            } else {
-                align = x < 640 ? 2 : 0;
-            }
-            drawText(stateTextMap.getOrDefault(s, s.getDefaultText()), x, y, align);
+
+            drawText(
+                    model.stateTextMap.getOrDefault(s, s.getDefaultText()),
+                    model.viewX,
+                    model.viewY,
+                    Aligns.INDICATOR_ALIGNMENT
+            );
         }
 
 
-        public void drawText(String text, int x, int y, int align) {
-            int tempX = (int) (x - renderer.getStringWidth(text) * (align / 2F));
+        public void drawText(String text, int x, int y, Aligns.Alignment alignment) {
+            Aligns.Align align = alignment.getAlignment(model.viewX, model.viewY);
+            int tempX = align.mapFromLeft(x, renderer.getStringWidth(text));
 
             if (model.chroma) {
                 int speed = Math.round(151 - model.chromaSpeed);
@@ -103,25 +98,14 @@ public class UserInterface {
                 renderer.drawString(text, tempX, y, Color.HSBtoRGB(model.hue, model.saturation, model.brightness), model.dropShadow);
             }
             if (this.highlight) {
-                int d = controller.width / 3;
-
-                GL11.glPushAttrib(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_ENABLE_BIT);
-
-                GlStateManager.enableAlpha();
-                GlStateManager.enableBlend();
-                GlStateManager.disableTexture2D();
-                GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
-                GlStateManager.color(1F, 1F, 1F, 1F);
-
-                GuiScreen.drawRect((int) (1.45 * d), 0, (int) (1.45 * d) + 1, 660, 0x1AFFFFFF);
-                GuiScreen.drawRect((int) (1.55 * d), 0, (int) (1.55 * d) + 1, 660, 0x1AFFFFFF);
-                GuiScreen.drawRect(500, 660, 780, 659, 0x1AFFFFFF);
-                GuiScreen.drawRect(500, 660, 501, controller.height, 0x1AFFFFFF);
-                GuiScreen.drawRect(640, 660, 641, controller.height, 0x1AFFFFFF);
-                GuiScreen.drawRect(780, 660, 781, controller.height, 0x1AFFFFFF);
-
-                GuiScreen.drawRect(tempX - 5, y - 5, tempX + renderer.getStringWidth(text) + 5, y + renderer.FONT_HEIGHT + 5, 0x1A2E2E2E);
-                GL11.glPopAttrib();
+                for (Area area : alignment.getAreas()) {
+                    GuiScreen.drawRect(
+                            area.getMinX() + 2,
+                            area.getMinY() + 2,
+                            area.getMaxX() - 2,
+                            area.getMaxY() - 2,
+                            0x1AFFFFFF);
+                }
             }
         }
     }
@@ -132,7 +116,7 @@ public class UserInterface {
         private GuiSlider chromaSpeedSlider;
         private GuiButton chromaToggle;
 
-        private ColourPicker colourPicker = new ColourPicker(3, 0, 0, 100);
+        private final ColourPicker colourPicker = new ColourPicker(3, 0, 0, 100);
 
         private GuiButton dropShadowToggle;
 
@@ -145,6 +129,7 @@ public class UserInterface {
 
         @Override
         public void initGui() {
+            SprintPls.INSTANCE.getConfigurator().load();
             chromaSpeedSlider = new GuiSlider(new GuiPageButtonList.GuiResponder() {
                 @Override
                 public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {
@@ -164,13 +149,13 @@ public class UserInterface {
             // ID 3 reserved for colour picker
             dropShadowToggle = new GuiButton(4, 0, 0, "Drop Shadow: " + (model.dropShadow ? "\u00a7aYES" : "\u00a7cNO"));
             idleText = new GuiTextField(5, fontRendererObj, 0, 0, 129 /* Reserve 70 pixels for textfield name */, 20);
-            idleText.setText(view.stateTextMap.getOrDefault(SprintState.NONE, SprintState.NONE.getDefaultText()));
+            idleText.setText(model.stateTextMap.getOrDefault(SprintState.NONE, SprintState.NONE.getDefaultText()));
 
             vanillaText = new GuiTextField(6, fontRendererObj, 0, 0, 129 /* Reserve 70 pixels for textfield name */, 20);
-            vanillaText.setText(view.stateTextMap.getOrDefault(SprintState.VANILLA, SprintState.VANILLA.getDefaultText()));
+            vanillaText.setText(model.stateTextMap.getOrDefault(SprintState.VANILLA, SprintState.VANILLA.getDefaultText()));
 
             toggledText = new GuiTextField(7, fontRendererObj, 0, 0, 129 /* Reserve 70 pixels for textfield name */, 20);
-            toggledText.setText(view.stateTextMap.getOrDefault(SprintState.SPRINT_PLS, SprintState.SPRINT_PLS.getDefaultText()));
+            toggledText.setText(model.stateTextMap.getOrDefault(SprintState.SPRINT_PLS, SprintState.SPRINT_PLS.getDefaultText()));
 
             dragModeToggle = new GuiButton(8, 0, 0, "Drag Mode");
 
@@ -179,6 +164,8 @@ public class UserInterface {
             buttonList.add(colourPicker);
             buttonList.add(dropShadowToggle);
             buttonList.add(dragModeToggle);
+
+            colourPicker.setColour(Color.getHSBColor(model.hue, model.saturation, model.brightness));
             super.initGui();
         }
 
@@ -186,6 +173,7 @@ public class UserInterface {
         public void onGuiClosed() {
             dragMode = -1;
             view.highlight = false;
+            SprintPls.INSTANCE.getConfigurator().save();
             super.onGuiClosed();
         }
 
@@ -195,21 +183,20 @@ public class UserInterface {
             view.highlight = dragMode != -1;
 
             dragModeToggle.width = fontRendererObj.getStringWidth(dragModeToggle.displayString) + 10;
-            dragModeToggle.xPosition = 0;
-            dragModeToggle.yPosition = height - dragModeToggle.height;
+            dragModeToggle.xPosition = 2;
+            dragModeToggle.yPosition = height - dragModeToggle.height - 2;
 
 
-
-            if (view.x > 0 && view.x < dragModeToggle.width && view.y > height - dragModeToggle.height && view.y < height) {
-                dragModeToggle.xPosition = width - dragModeToggle.width;
-                dragModeToggle.yPosition = 0;
+            if (model.viewX > dragModeToggle.xPosition && model.viewX < dragModeToggle.xPosition + dragModeToggle.width && model.viewY > dragModeToggle.yPosition - dragModeToggle.height && model.viewY < height) {
+                dragModeToggle.xPosition = width - dragModeToggle.width - 2;
+                dragModeToggle.yPosition = 2;
             }
 
             if (dragMode != -1) {
 
                 if (!dragModeToggle.isMouseOver() && Mouse.isButtonDown(0) && dragMode == 0) {
-                    view.x = mouseX;
-                    view.y = mouseY;
+                    model.viewX = mouseX;
+                    model.viewY = mouseY;
                 }
 
                 dragModeToggle.drawButton(mc, mouseX, mouseY);
@@ -302,13 +289,11 @@ public class UserInterface {
             idleText.textboxKeyTyped(typedChar, keyCode);
             vanillaText.textboxKeyTyped(typedChar, keyCode);
             toggledText.textboxKeyTyped(typedChar, keyCode);
-            view.stateTextMap.put(SprintState.NONE, idleText.getText());
-            view.stateTextMap.put(SprintState.VANILLA, vanillaText.getText());
-            view.stateTextMap.put(SprintState.SPRINT_PLS, toggledText.getText());
+            model.stateTextMap.put(SprintState.NONE, idleText.getText());
+            model.stateTextMap.put(SprintState.VANILLA, vanillaText.getText());
+            model.stateTextMap.put(SprintState.SPRINT_PLS, toggledText.getText());
             super.keyTyped(typedChar, keyCode);
         }
-
-
 
 
         @Override

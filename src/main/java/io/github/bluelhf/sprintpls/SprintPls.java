@@ -1,14 +1,18 @@
 package io.github.bluelhf.sprintpls;
 
 import io.github.bluelhf.sprintpls.command.SprintPlsCommand;
+import io.github.bluelhf.sprintpls.io.Configurator;
 import io.github.bluelhf.sprintpls.listener.HitStopper;
 import io.github.bluelhf.sprintpls.listener.MoveSubscriber;
 import io.github.bluelhf.sprintpls.renderer.UserInterface;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+
+import java.io.File;
 
 @Mod(modid = SprintPls.MODID, version = SprintPls.VERSION, clientSideOnly = true)
 public class SprintPls {
@@ -20,6 +24,8 @@ public class SprintPls {
     public boolean shouldSprint = false;
     public boolean previousSprintState = false;
     private UserInterface userInterface;
+    private Configurator configurator;
+
     private final HitStopper hitStopper = new HitStopper();
 
 
@@ -28,7 +34,12 @@ public class SprintPls {
         // This instance won't be nulled when the mod is unloaded, which is problematic, but Forge doesn't allow us to run code when our mod unloads...
         INSTANCE = this;
 
-        userInterface = new UserInterface();
+        userInterface = new UserInterface(this);
+        configurator = new Configurator(
+                new Configuration(new File("sprintpls.cfg")),
+                userInterface.getModel()
+        );
+
         MinecraftForge.EVENT_BUS.register(new MoveSubscriber());
         MinecraftForge.EVENT_BUS.register(hitStopper);
         SprintPlsCommand command = new SprintPlsCommand();
@@ -36,6 +47,9 @@ public class SprintPls {
         ClientCommandHandler.instance.registerCommand(command);
     }
 
+    public Configurator getConfigurator() {
+        return configurator;
+    }
 
     public HitStopper getHitStopper() {
         return hitStopper;

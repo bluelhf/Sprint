@@ -39,6 +39,13 @@ public class ColourPicker extends GuiButton {
         return colour;
     }
 
+    public void setColour(Color newColour) {
+        float[] hsb = Color.RGBtoHSB(newColour.getRed(), newColour.getGreen(), newColour.getBlue(), null);
+        this.cursorX = (int) (hsb[0] * (width - 20));
+        this.cursorY = (int) ((1 - hsb[1]) * (width - 20));
+        this.brightness = (int) ((1 - hsb[2]) * (height - 15));
+    }
+
     @Override
     public void drawButtonForegroundLayer(int mouseX, int mouseY) {
 
@@ -67,7 +74,7 @@ public class ColourPicker extends GuiButton {
             drawGradientRect(
                     x,
                     yPosition,
-                    x+1,
+                    x + 1,
                     yPosition + height,
                     Color.HSBtoRGB(xIndex / (float) pickerWidth, 1, 1),
                     Color.HSBtoRGB(xIndex / (float) pickerWidth, 0, 1)
@@ -119,9 +126,9 @@ public class ColourPicker extends GuiButton {
                     (xPosition + cursorX + 1 * Math.cos(Math.toRadians(i))),
                     (yPosition + cursorY + 1 * Math.sin(Math.toRadians(i))), 1.0F
             ).color(
-                    Math.min(1.5F - cursorY / (float)(height), 1) * 2,
-                    Math.min(1.5F - cursorY / (float)(height), 1) * 2,
-                    Math.min(1.5F - cursorY / (float)(height), 1) * 2,
+                    Math.min(1.5F - cursorY / (float) (height), 1) * 2,
+                    Math.min(1.5F - cursorY / (float) (height), 1) * 2,
+                    Math.min(1.5F - cursorY / (float) (height), 1) * 2,
                     1F
             ).endVertex();
 
