@@ -1,5 +1,4 @@
-# Sprint
-
+<img src="assets/banner.png" alt="Sprint's Logo" height="300px"/>
 Sprint is a toggleable sprint mod designed to be actually usable, intuitive, and configurable. It supports a million different colours,
 along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide a maximum of one colour per
 character.
@@ -32,4 +31,4 @@ If you're smart enough to not use Java 8, you're smart enough to modify the grad
 
 ## I've found a bug! How do I report it?
 
-It's very simple! Just go to the [Issues](https://github.com/bluelhf/Sprint/issues) tab and create a new issue!
+It's very simple! Just go to the [Issues](https://github.com/bluelhf/Sprint/issues) tab and create a new issue!"
