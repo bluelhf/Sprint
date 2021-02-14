@@ -15,7 +15,13 @@ public class HitStopper {
         if (minecraft == null) return;
         if (minecraft.thePlayer == null) return;
         if (event.entityPlayer != minecraft.thePlayer) return;
-        if (!event.hasResult() || !event.getResult().equals(Event.Result.ALLOW))  return;
+        if (event.hasResult() && (event.getResult().equals(Event.Result.ALLOW) || event.getResult().equals(Event.Result.DEFAULT))) {
+            return;
+        }
+
+        if (event.target.hurtResistantTime > 10) return;
+
+        if (!minecraft.thePlayer.isSprinting()) return;
         nextSprintTime = System.currentTimeMillis() + 100;
     }
 
