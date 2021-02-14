@@ -33,9 +33,9 @@ goto fail
 
 :findJavaFromJavaHome
 set JAVA_HOME=%JAVA_HOME:"=%
-for %%I in ("%JAVA_HOME%\..") do set "JAVA_PARENT=%%~fI"
-for /f "usebackq delims=|" %%i in (`dir /b "%JAVA_PARENT%\jdk-8*"`) do @(set "JAVA_HOME=%JAVA_PARENT%\%%i")
-echo Got JDK8 JAVA_HOME as %JAVA_HOME%
+REM for %%I in ("%JAVA_HOME%\..") do set "JAVA_PARENT=%%~fI"
+REM for /f "usebackq delims=|" %%i in (`dir /b "%JAVA_PARENT%\jdk-8*"`) do @(set "JAVA_HOME=%JAVA_PARENT%\%%i")
+REM echo Got JDK8 JAVA_HOME as %JAVA_HOME%
 
 set JAVA_EXE=%JAVA_HOME%/bin/java.exe
 
