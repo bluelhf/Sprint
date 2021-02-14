@@ -1,4 +1,4 @@
-package io.github.bluelhf.sprintpls.renderer;
+package io.github.bluelhf.sprint.renderer;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

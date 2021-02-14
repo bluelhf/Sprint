@@ -1,10 +1,10 @@
-# SprintPls
+# Sprint
 
-SprintPls is a toggleable sprint mod designed to be actually usable, intuitive, and configurable. It supports a million different colours,
+Sprint is a toggleable sprint mod designed to be actually usable, intuitive, and configurable. It supports a million different colours,
 along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide a maximum of one colour per
 character.
 
-SprintPls has a movable indicator with configurable text, and is designed to look beautiful in the configuration you want.
+Sprint has a movable indicator with configurable text, and is designed to look beautiful in the configuration you want.
 
 
 ## Sounds great. How do I use it?
@@ -32,4 +32,4 @@ If you're smart enough to not use Java 8, you're smart enough to modify the grad
 
 ## I've found a bug! How do I report it?
 
-It's very simple! Just go to the [Issues](https://github.com/bluelhf/SprintPls/issues) tab and create a new issue!
+It's very simple! Just go to the [Issues](https://github.com/bluelhf/Sprint/issues) tab and create a new issue!

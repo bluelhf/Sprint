@@ -1,7 +1,7 @@
 [
 {
-  "modid": "sprintpls",
-  "name": "SprintPls",
+  "modid": "sprint",
+  "name": "Sprint",
   "description": "An actually functional ToggleSprint",
   "version": "${version}",
   "mcversion": "${mcversion}",

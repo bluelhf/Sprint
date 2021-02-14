@@ -1,4 +1,4 @@
-package io.github.bluelhf.sprintpls.util;
+package io.github.bluelhf.sprint.util;
 
 /**
  * Represents a one-dimensional boundary

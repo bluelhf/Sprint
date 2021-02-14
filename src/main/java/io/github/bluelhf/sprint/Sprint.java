@@ -1,10 +1,10 @@
-package io.github.bluelhf.sprintpls;
+package io.github.bluelhf.sprint;
 
-import io.github.bluelhf.sprintpls.command.SprintPlsCommand;
-import io.github.bluelhf.sprintpls.io.Configurator;
-import io.github.bluelhf.sprintpls.listener.HitStopper;
-import io.github.bluelhf.sprintpls.listener.MoveSubscriber;
-import io.github.bluelhf.sprintpls.renderer.UserInterface;
+import io.github.bluelhf.sprint.command.SprintCommand;
+import io.github.bluelhf.sprint.io.Configurator;
+import io.github.bluelhf.sprint.listener.HitStopper;
+import io.github.bluelhf.sprint.listener.MoveSubscriber;
+import io.github.bluelhf.sprint.renderer.UserInterface;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -14,12 +14,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
 import java.io.File;
 
-@Mod(modid = SprintPls.MODID, version = SprintPls.VERSION, clientSideOnly = true)
-public class SprintPls {
-    public static final String MODID = "sprintpls";
+@Mod(modid = Sprint.MODID, version = Sprint.VERSION, clientSideOnly = true)
+public class Sprint {
+    public static final String MODID = "sprint";
     public static final String VERSION = "1.0";
 
-    public static SprintPls INSTANCE;
+    public static Sprint INSTANCE;
 
     public boolean shouldSprint = false;
     public boolean previousSprintState = false;
@@ -36,13 +36,13 @@ public class SprintPls {
 
         userInterface = new UserInterface(this);
         configurator = new Configurator(
-                new Configuration(new File("sprintpls.cfg")),
+                new Configuration(new File("config/sprint.cfg")),
                 userInterface.getModel()
         );
 
         MinecraftForge.EVENT_BUS.register(new MoveSubscriber());
         MinecraftForge.EVENT_BUS.register(hitStopper);
-        SprintPlsCommand command = new SprintPlsCommand();
+        SprintCommand command = new SprintCommand();
         MinecraftForge.EVENT_BUS.register(command);
         ClientCommandHandler.instance.registerCommand(command);
     }

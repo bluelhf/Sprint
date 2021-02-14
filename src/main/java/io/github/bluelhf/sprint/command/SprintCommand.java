@@ -1,6 +1,6 @@
-package io.github.bluelhf.sprintpls.command;
+package io.github.bluelhf.sprint.command;
 
-import io.github.bluelhf.sprintpls.SprintPls;
+import io.github.bluelhf.sprint.Sprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 import java.util.List;
 
-public class SprintPlsCommand extends CommandBase {
+public class SprintCommand extends CommandBase {
     private boolean scheduled = false;
 
     @Override
@@ -20,18 +20,17 @@ public class SprintPlsCommand extends CommandBase {
 
     @Override
     public List<String> getCommandAliases() {
-        //noinspection unchecked
-        return Arrays.asList(new String[]{"spls", "sprintplease"});
+        return Arrays.asList("spr", "sprint");
     }
 
     @Override
     public String getCommandName() {
-        return "sprintpls";
+        return "sprint";
     }
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "/sprintpls";
+        return "/sprint";
     }
 
     @Override
@@ -42,7 +41,7 @@ public class SprintPlsCommand extends CommandBase {
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END || !scheduled) return;
-        Minecraft.getMinecraft().displayGuiScreen(SprintPls.INSTANCE.getState().getController());
+        Minecraft.getMinecraft().displayGuiScreen(Sprint.INSTANCE.getState().getController());
         scheduled = false;
     }
 }

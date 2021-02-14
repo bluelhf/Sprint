@@ -1,6 +1,6 @@
-package io.github.bluelhf.sprintpls.io;
+package io.github.bluelhf.sprint.io;
 
-import io.github.bluelhf.sprintpls.renderer.UserInterface;
+import io.github.bluelhf.sprint.renderer.UserInterface;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.config.Configuration;
 

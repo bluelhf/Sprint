@@ -1,4 +1,4 @@
-package io.github.bluelhf.sprintpls.listener;
+package io.github.bluelhf.sprint.listener;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;

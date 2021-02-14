@@ -1,4 +1,4 @@
-package io.github.bluelhf.sprintpls.util;
+package io.github.bluelhf.sprint.util;
 
 public class Area {
     private int minX, minY, maxX, maxY;

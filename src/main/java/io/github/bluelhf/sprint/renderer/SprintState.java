@@ -1,11 +1,11 @@
-package io.github.bluelhf.sprintpls.renderer;
+package io.github.bluelhf.sprint.renderer;
 
-import io.github.bluelhf.sprintpls.SprintPls;
+import io.github.bluelhf.sprint.Sprint;
 import net.minecraft.client.Minecraft;
 
 public enum SprintState {
     VANILLA("Sprinting (Vanilla)"),
-    SPRINT_PLS("Sprinting (SprintPls)"),
+    SPRINT_PLS("Sprinting (Sprint)"),
     NONE("<3");
 
     private final String defaultText;
@@ -22,7 +22,7 @@ public enum SprintState {
         Minecraft minecraft = Minecraft.getMinecraft();
         if (minecraft == null) return NONE;
         if (minecraft.thePlayer == null) return NONE;
-        if (SprintPls.INSTANCE.shouldSprint) return SPRINT_PLS;
+        if (Sprint.INSTANCE.shouldSprint) return SPRINT_PLS;
         if (minecraft.thePlayer.isSprinting()) return VANILLA;
 
         return NONE;

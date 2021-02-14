@@ -1,4 +1,4 @@
-package io.github.bluelhf.sprintpls.util;
+package io.github.bluelhf.sprint.util;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

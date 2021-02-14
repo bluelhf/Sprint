@@ -1,4 +1,4 @@
-package io.github.bluelhf.sprintpls.util;
+package io.github.bluelhf.sprint.util;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;

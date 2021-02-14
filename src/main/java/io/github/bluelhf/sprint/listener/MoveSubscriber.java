@@ -1,11 +1,10 @@
-package io.github.bluelhf.sprintpls.listener;
+package io.github.bluelhf.sprint.listener;
 
-import io.github.bluelhf.sprintpls.SprintPls;
+import io.github.bluelhf.sprint.Sprint;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.potion.Potion;
-import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
@@ -22,12 +21,12 @@ public class MoveSubscriber {
 
         if (minecraft.gameSettings.keyBindSprint.isPressed()) {
             // toggleSprint() returns the new state of the shouldSprint boolean - we can utilise this
-            boolean newState = SprintPls.INSTANCE.toggleSprint();
+            boolean newState = Sprint.INSTANCE.toggleSprint();
             if (newState) {
                 // We set the previous sprint state so we know what to return to should the user stop sprinting
-                SprintPls.INSTANCE.previousSprintState = player.isSprinting();
+                Sprint.INSTANCE.previousSprintState = player.isSprinting();
             } else {
-                player.setSprinting(SprintPls.INSTANCE.previousSprintState);
+                player.setSprinting(Sprint.INSTANCE.previousSprintState);
                 KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindSprint.getKeyCode(), false);
             }
         } else {
@@ -36,7 +35,7 @@ public class MoveSubscriber {
                 return;
             }
             boolean canSprint = (float) player.getFoodStats().getFoodLevel() > 6.0F || player.capabilities.allowFlying;
-            if (SprintPls.INSTANCE.shouldSprint && player.movementInput.moveForward >= 0.8F && canSprint && !player.isUsingItem() && !player.isPotionActive(Potion.blindness) && SprintPls.INSTANCE.getHitStopper().canSprint()) {
+            if (Sprint.INSTANCE.shouldSprint && player.movementInput.moveForward >= 0.8F && canSprint && !player.isUsingItem() && !player.isPotionActive(Potion.blindness) && Sprint.INSTANCE.getHitStopper().canSprint()) {
                 player.setSprinting(true);
             }
         }

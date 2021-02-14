@@ -1,8 +1,8 @@
-package io.github.bluelhf.sprintpls.renderer;
+package io.github.bluelhf.sprint.renderer;
 
-import io.github.bluelhf.sprintpls.SprintPls;
-import io.github.bluelhf.sprintpls.util.Aligns;
-import io.github.bluelhf.sprintpls.util.Area;
+import io.github.bluelhf.sprint.Sprint;
+import io.github.bluelhf.sprint.util.Aligns;
+import io.github.bluelhf.sprint.util.Area;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.util.ResourceLocation;
@@ -20,9 +20,9 @@ public class UserInterface {
     private final Model model;
     private final View view;
     private final Controller controller;
-    private final SprintPls registrar;
+    private final Sprint registrar;
 
-    public UserInterface(SprintPls registrar) {
+    public UserInterface(Sprint registrar) {
         this.registrar = registrar;
         model = new Model();
         view = new View();
@@ -129,7 +129,7 @@ public class UserInterface {
 
         @Override
         public void initGui() {
-            SprintPls.INSTANCE.getConfigurator().load();
+            Sprint.INSTANCE.getConfigurator().load();
             chromaSpeedSlider = new GuiSlider(new GuiPageButtonList.GuiResponder() {
                 @Override
                 public void func_175321_a(int p_175321_1_, boolean p_175321_2_) {
@@ -173,7 +173,7 @@ public class UserInterface {
         public void onGuiClosed() {
             dragMode = -1;
             view.highlight = false;
-            SprintPls.INSTANCE.getConfigurator().save();
+            Sprint.INSTANCE.getConfigurator().save();
             super.onGuiClosed();
         }
 
