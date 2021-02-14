@@ -32,6 +32,7 @@ If you're smart enough to not use Java 8, you're smart enough to modify the grad
 ## Screenshots
 <img src="assets/without.png" alt="Knockback without Sprint" height="250px"/>
 <img src="assets/with.png" alt="Knockback with Sprint" height="250px"/>
+<img src="assets/gui.png" alt="Sprint's Options Menu" height="250px"/>
 
 ## I've found a bug! How do I report it?
 
