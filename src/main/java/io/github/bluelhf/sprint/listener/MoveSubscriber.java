@@ -18,16 +18,15 @@ public class MoveSubscriber {
 
         EntityPlayerSP player = minecraft.thePlayer;
         if (player == null) return;
-
-        if (minecraft.gameSettings.keyBindSprint.isPressed()) {
+        KeyBinding keyBindToggle = Sprint.INSTANCE.getKeyBindToggle();
+        if (keyBindToggle.isPressed()) {
             // toggleSprint() returns the new state of the shouldSprint boolean - we can utilise this
             boolean newState = Sprint.INSTANCE.toggleSprint();
             if (newState) {
                 // We set the previous sprint state so we know what to return to should the user stop sprinting
-                Sprint.INSTANCE.previousSprintState = player.isSprinting();
+                Sprint.INSTANCE.previousSprintState = player.isSprinting() || keyBindToggle.getKeyCode() == minecraft.gameSettings.keyBindSprint.getKeyCode();
             } else {
                 player.setSprinting(Sprint.INSTANCE.previousSprintState);
-                KeyBinding.setKeyBindState(minecraft.gameSettings.keyBindSprint.getKeyCode(), false);
             }
         } else {
             if (player.motionX * player.motionX + player.motionZ * player.motionZ < 0.000025 && player.onGround) {
