@@ -1,6 +1,6 @@
 # SprintPls
 
-SprintPls is a togglesprint mod designed to be actually usable, intuitive, and configurable. It supports a million different colours,
+SprintPls is a toggleable sprint mod designed to be actually usable, intuitive, and configurable. It supports a million different colours,
 along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide a maximum of one colour per
 character.
 
@@ -18,3 +18,7 @@ Then, in your PowerShell or Terminal, **type `./gradlew build` and press Enter.*
 That means your build was successful. **The mod's jarfile will now be available by first going into the `build` directory, then the `libs` directory.**
 
 Please note that on Windows you have to change the gradlew.bat file to point to your existing Java 8 installation. It's on [line 19](https://github.com/bluelhf/SprintPls/blob/1aa6422fa749e724992eaf731d648ca8d3cacf50/gradlew.bat#L19).
+
+## I've found a bug! How do I report it?
+
+It's very simple! Just go to the [Issues](https://github.com/bluelhf/SprintPls/issues) tab and create a new issue!
