@@ -1,5 +1,4 @@
-# Sprint
-
+<img src="assets/banner.png" alt="Sprint's Logo" height="150px"/>
 Sprint is a toggleable sprint mod designed to be actually usable, intuitive, and configurable. It supports a million different colours,
 along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide a maximum of one colour per
 character.
