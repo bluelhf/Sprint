@@ -12,12 +12,23 @@ SprintPls has a movable indicator with configurable text, and is designed to loo
 To get the latest features, you can compile this repository yourself.
 You can also check the Releases tab, if there happen to be any new releases that I've compiled specifically for you :)
 
-To compile yourself, you'll need to **download this repository** (either via `git clone` or, on GitHub, the big green `Code` button and then the `Download ZIP` button)
-Once you've downloaded the repository and possibly extracted it, you'll need to **open PowerShell or a Terminal inside the directory.**
-Then, in your PowerShell or Terminal, **type `./gradlew build` and press Enter.** Once the build is done, you should see a big text saying `BUILD SUCCESSFUL!`
-That means your build was successful. **The mod's jarfile will now be available by first going into the `build` directory, then the `libs` directory.**
+#### Compiling it yourself
 
-Please note that on Windows you have to change the gradlew.bat file to point to your existing Java 8 installation. It's on [line 19](https://github.com/bluelhf/SprintPls/blob/1aa6422fa749e724992eaf731d648ca8d3cacf50/gradlew.bat#L19).
+Prerequisites:
+ - Java 8
+ - Internet access
+ - Motivation
+
+
+1. **Download the repository** either via `git clone` or, on GitHub, the big green `Code` button and then the `Download ZIP` button
+2. **Extract the downloaded archive** if needed.
+3. **Open PowerShell or a Terminal**.
+4. In the newly opened powershell or terminal, **type `./gradlew clean build` and press Enter.**
+5. Once you see the big `BUILD SUCCESSFUL` text, **get your mod file from the `build/libs` directory.**
+
+#### Help, I don't use an archaic version of Java!
+
+If you're smart enough to not use Java 8, you're smart enough to modify the gradlew script yourself.
 
 ## I've found a bug! How do I report it?
 
