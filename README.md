@@ -29,6 +29,10 @@ Prerequisites:
 
 If you're smart enough to not use Java 8, you're smart enough to modify the gradlew script yourself.
 
+## Screenshots
+<img src="assets/without.png" alt="Knockback without Sprint" height="250px"/>
+<img src="assets/with.png" alt="Knockback with Sprint" height="250px"/>
+
 ## I've found a bug! How do I report it?
 
 It's very simple! Just go to the [Issues](https://github.com/bluelhf/Sprint/issues) tab and create a new issue!
