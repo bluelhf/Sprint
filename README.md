@@ -1,6 +1,6 @@
 <sub>[Yeah, yeah, whatever, just give me the mod](https://github.com/bluelhf/Sprint/releases/latest/download/sprint.jar)</sub>
 
-<img src="assets/banner.png" alt="Sprint's Logo" height="150px"/>
+<img src="assets/banner.png" alt="Sprint's Logo" width="75%"/>
 Sprint is a toggleable sprint mod for Forge 1.8.9 designed to be actually usable, intuitive, and configurable. It supports (literally) 
 a million different colours,along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide 
 a maximum of one colour per character.
@@ -32,9 +32,9 @@ Prerequisites:
 If you're smart enough to not use Java 8, you're smart enough to modify the gradlew script yourself.
 
 ## Screenshots
-<img src="assets/without.png" alt="Knockback without Sprint" height="250px"/>
-<img src="assets/with.png" alt="Knockback with Sprint" height="250px"/>
-<img src="assets/gui.png" alt="Sprint's Options Menu" height="250px"/>
+<img src="assets/without.png" alt="Knockback without Sprint" width="55%"/>
+<img src="assets/with.png" alt="Knockback with Sprint" width="55%"/>
+<img src="assets/gui.png" alt="Sprint's Options Menu" width="55%"/>
 
 ## I've found a bug! How do I report it?
 
