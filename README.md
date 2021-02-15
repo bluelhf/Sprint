@@ -9,7 +9,7 @@ Sprint has a movable indicator with configurable text, and is designed to look b
 ## Sounds great. How do I use it?
 
 To get the latest features, you can compile this repository yourself.
-You can also check the Releases tab, if there happen to be any new releases that I've compiled specifically for you :)
+You can also check the [Releases tab](https://github.com/bluelhf/Sprint/releases/), if there happen to be any new releases that I've compiled specifically for you :)
 
 #### Compiling it yourself
 
