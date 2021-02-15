@@ -1,3 +1,4 @@
+[Yeah, yeah, whatever, just give me the mod](https://github.com/bluelhf/Sprint/releases/latest/download/sprint.jar)
 <img src="assets/banner.png" alt="Sprint's Logo" height="150px"/>
 Sprint is a toggleable sprint mod for Forge 1.8.9 designed to be actually usable, intuitive, and configurable. It supports (literally) 
 a million different colours,along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide 
