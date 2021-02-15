@@ -27,6 +27,14 @@ minecraft {
     mappings = "stable_20"
 }
 
+jar {
+    archiveName = "sprint.jar"
+}
+
+sourceJar {
+    archiveName = "sprint-sources.jar"
+}
+
 dependencies {
 
 }
