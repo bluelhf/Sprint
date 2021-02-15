@@ -1,4 +1,4 @@
-[Yeah, yeah, whatever, just give me the mod](https://github.com/bluelhf/Sprint/releases/latest/download/sprint.jar)
+<sub>[Yeah, yeah, whatever, just give me the mod](https://github.com/bluelhf/Sprint/releases/latest/download/sprint.jar)</sub>
 
 <img src="assets/banner.png" alt="Sprint's Logo" height="150px"/>
 Sprint is a toggleable sprint mod for Forge 1.8.9 designed to be actually usable, intuitive, and configurable. It supports (literally) 
