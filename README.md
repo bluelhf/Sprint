@@ -2,7 +2,7 @@
 
 <img src="assets/banner.png" alt="Sprint's Logo" width="75%"/>
 Sprint is a toggleable sprint mod for Forge 1.8.9 designed to be actually usable, intuitive, and configurable. It supports (literally) 
-a million different colours,along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide 
+a million different colours, along with a never-before-seen per-character chroma feature, unlike other popular mods which only provide 
 a maximum of one colour per character.
 
 Sprint has a movable indicator with configurable text, and is designed to look beautiful in the configuration you want.
